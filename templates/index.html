@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h2>Калькулятор.</h2>
+
+{{ if .error }}
+<p style="color: red;">{{ .error }}</p>
+{{ end }}
+
+<form action="/calculate" method="post">
+  <label for="Power">Середньодобова потужність МВт:</label>
+  <input type="number" id="Power" name="Power" step="any" required>
+
+  <label for="Error1">Середньоквадратичне відхилення до МВт:</label>
+  <input type="number" id="Error1" name="Error1" step="any" required>
+
+  <label for="Error2">Допустима похибка прогнозу (%):</label>
+  <input type="number" id="Error2" name="Error2" step="any" required>
+
+  <label for="Price">Вартість електроенергії грн/КВт*год:</label>
+  <input type="number" id="Price" name="Price" step="any" required>
+
+  <button type="submit">Розрахувати</button>
+</form>
+
+<div id="results">
+  {{ if .profit}}
+  <h2>Результат:</h2>
+  <p><strong>Прибуток від вдосконалення:</strong> <span>{{ .profit }}</span></p>
+  {{ end }}
+</div>
+</body>
+</html>
